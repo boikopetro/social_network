@@ -1,0 +1,5 @@
+.app-footer {
+    background-color: mediumorchid;
+    grid-area: f;
+    min-height: 100px;
+}

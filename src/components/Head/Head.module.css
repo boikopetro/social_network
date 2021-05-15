@@ -1,0 +1,10 @@
+.header {
+    max-height: 200px;
+    background-color: brown;
+    grid-area: h;
+}
+.header img {
+    width: 200px;
+    padding: 20px;
+    border-radius: 20%;
+}

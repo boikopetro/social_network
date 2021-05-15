@@ -1,0 +1,15 @@
+.content {
+    grid-area: c;
+}
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.dialogs div {
+    padding: 5px;
+}
+
+.dialogsItems .active {
+    color: gold;
+    font-size: 1.5rem;
+}
