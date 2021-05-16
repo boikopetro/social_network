@@ -4,7 +4,7 @@ const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 const SEND_MESSAGE = "SEND-MESSAGE";
 
 export const updateNewMessageBodyCreator = (body: string) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body} as const);
-export const sendMessageCreator = (postText: string) => ({type: SEND_MESSAGE} as const);
+export const sendMessageCreator = () => ({type: SEND_MESSAGE} as const);
 
 const initialState = {
     messages: [
@@ -12,7 +12,7 @@ const initialState = {
         {id: "1", message: "text"},
         {id: "2", message: "hi"}
     ],
-    newMessageText: "",
+    newMessageBody: "",
     dialogs: [
         {id: "0", name: "Jack"},
         {id: "1", name: "Nick"},
@@ -27,11 +27,11 @@ const initialState = {
 const dialogsReducer = (state: MessagesPageType = initialState, action: ActionsType) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageText = action.body;
+            state.newMessageBody = action.body;
             return state;
         case SEND_MESSAGE:
-            const body = state.newMessageText;
-            state.newMessageText = "";
+            const body = state.newMessageBody;
+            state.newMessageBody = "";
             state.messages.push({id: "9", message: body})
             return state;
         default:

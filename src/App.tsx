@@ -5,11 +5,11 @@ import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
 import News from "./components/News/News"
 import Music from "./components/Music/Music";
-import Dialogs from "./components/Dialogs/Dialogs";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {AppStoreType} from "./redux/redux-store";
+import DialogsContainer from "./components/Dialogs/Message/DialogsContainer";
 
 
 type PropsType = {
@@ -30,11 +30,7 @@ const App: React.FC<PropsType> = (props) => {
                     />
 
                     <Route path='/dialogs'
-                           render={() => <Dialogs
-                               newMessageValue={props.store.getState().dialogsPage.newMessageText}
-                               messagesPage={props.store.getState().dialogsPage}
-                               dispatch={props.store.dispatch.bind(props.store)}
-                           />}
+                           render={() => <DialogsContainer store={props.store}/>}
                     />
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>

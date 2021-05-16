@@ -16,10 +16,3 @@ export type AppStoreType = typeof store
 export type AppStateType = ReturnType<ReduxStoreType>
 
 export default store;
-
-
-/*
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
-export type AppStoreType = typeof storeexport
-type AppStateType = ReturnType<typeof rootReducer>
-export default store*/

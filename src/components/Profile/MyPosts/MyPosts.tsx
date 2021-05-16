@@ -20,8 +20,8 @@ const MyPosts = (props: MyPostsPropsType) => {
         props.addPost();
     };
 
-    const onPostChange = () => {
-        const text = React.createRef<any>().current.value;
+    const onPostChange = (e:  React.ChangeEvent<HTMLTextAreaElement> ) => {
+        const text = e.currentTarget.value;
         props.updateNewPostText(text);
     };
 

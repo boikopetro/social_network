@@ -1,7 +1,7 @@
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
-import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
+import  {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+import  {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 
-const store: StoreType = {
+/*const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -16,7 +16,7 @@ const store: StoreType = {
                 {id: "1", message: "text"},
                 {id: "2", message: "hi"}
             ],
-            newMessageText: "",
+            newMessageBody: "",
             dialogs: [
                 {id: "0", name: "Jack"},
                 {id: "1", name: "Nick"},
@@ -41,9 +41,10 @@ const store: StoreType = {
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._callSubscriber();
     }
-}
+}*/
 
 // ----------------types--------------
+/*
 export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
@@ -51,6 +52,7 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
+*/
 
 export type ActionsType = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
@@ -82,7 +84,7 @@ export type ProfilePageType = {
 }
 export type MessagesPageType = {
     messages: MessagesPropsType
-    newMessageText: string
+    newMessageBody: string
     dialogs: DialogsType
 }
 export type RootStateType = {
