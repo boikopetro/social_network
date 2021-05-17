@@ -1,17 +1,18 @@
 import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
-import {AppStoreType} from "../../redux/redux-store";
+/*import {AppStoreType} from "../../redux/redux-store";*/
 
-type PropsType = {
+/*type PropsType = {
     store: AppStoreType
-}
+}*/
 
-const Profile = (props: PropsType) => {
+const Profile = () => {
+
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}/>
+            <MyPostsContainer />
         </div>
     )
 }
