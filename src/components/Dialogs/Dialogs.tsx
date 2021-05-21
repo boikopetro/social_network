@@ -4,7 +4,6 @@ import styles from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
-
 type DialogsPropsType = {
     updateNewMessageBody: (body: string) => void
     sendMessage: () => void

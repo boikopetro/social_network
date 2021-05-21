@@ -4,11 +4,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {RootStateType} from "./redux/store";
 import {BrowserRouter} from "react-router-dom";
-import {Provider} from "./StoreContext";
+import {Provider} from "react-redux";
 
-const rerenderEntireTree = (state: RootStateType) => {
+
+const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -20,8 +20,8 @@ const rerenderEntireTree = (state: RootStateType) => {
     );
 }
 
-rerenderEntireTree(store.getState());
+rerenderEntireTree();
 reportWebVitals();
 store.subscribe(() => {
-    rerenderEntireTree(store.getState())
+    rerenderEntireTree()
 });
