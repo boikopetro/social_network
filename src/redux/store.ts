@@ -1,5 +1,6 @@
 import  {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import  {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
+import {InitialStateType} from "./users-reducer";
 
 /*const store: StoreType = {
     _state: {
@@ -90,6 +91,7 @@ export type MessagesPageType = {
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: MessagesPageType
+    usersPage: InitialStateType
 }
 
 
