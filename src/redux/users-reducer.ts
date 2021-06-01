@@ -5,7 +5,7 @@ export type UsersType = Array<UserType>
 
 export type UserType = {
     id: string
-    photoUrl: string
+    photos: any
     followed: boolean
     fullName: string
     status: string
