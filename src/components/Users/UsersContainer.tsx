@@ -2,27 +2,27 @@ import React from "react";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/store";
 import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC, toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount, toggleIsFetching,
+    unfollow,
     UsersType
 } from "../../redux/users-reducer";
 import axios from "axios";
 import Users, {UsersPropsType} from "./Users";
 import preloader from "./../../assets/images/Hourglass.gif";
 import Preloader from "../common/Preloader/Preloader";
+import {AppStateType} from "../../redux/redux-store";
 
-/*type UsersContainerType = {
+type UsersContainerType = {
     componentDidMount: any
     onPageChanged: (pageNumber: number) => void
     render: () => UsersPropsType
-}*/
+}
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        //@ts-ignore
         this.props.toggleIsFetching(true);
         //@ts-ignore
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
@@ -36,11 +36,10 @@ class UsersContainer extends React.Component {
             });
     }
 
-    //@ts-ignore
     onPageChanged = (pageNumber: number) => {
-        //@ts-ignore
+
         this.props.setCurrentPage(pageNumber);
-        //@ts-ignore
+
         this.props.toggleIsFetching(true);
 
         //@ts-ignore
@@ -57,9 +56,11 @@ class UsersContainer extends React.Component {
 
     render() {
         //@ts-ignore
-        return <>{this.props.isFetching ? <Preloader /> : null}
+        return <>{this.props.isFetching ? <Preloader/> : null}
             <Users//@ts-ignore
-                totalUsersCount={this.props.totalUsersCount} pageSize={this.props.pageSize} currentPage={this.props.currentPage}
+                totalUsersCount={this.props.totalUsersCount} pageSize={this.props.pageSize}
+                //@ts-ignore
+                currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
                 //@ts-ignore
                 users={this.props.users} follow={this.props.follow} unfollow={this.props.unfollow}
@@ -68,7 +69,14 @@ class UsersContainer extends React.Component {
     }
 }
 
-const mapStateToProps = (state: RootStateType) => {
+type MapStateToPropsType = {
+    users: UsersType
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+}
+const mapStateToProps = (state: AppStateType) => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -77,28 +85,36 @@ const mapStateToProps = (state: RootStateType) => {
         isFetching: state.usersPage.isFetching,
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+/*const mapDispatchToProps = (dispatch: any) => {
     return {
         follow: (userId: string) => {
-            dispatch(followAC(userId));
+            dispatch(follow(userId));
         },
         unfollow: (userId: string) => {
-            dispatch(unfollowAC(userId));
+            dispatch(unfollow(userId));
         },
         setUsers: (users: UsersType) => {
-            dispatch(setUsersAC(users));
+            dispatch(setUsers(users));
         },
         setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
+            dispatch(setCurrentPage(pageNumber))
         },
         setTotalUsersCount: (totalCount: number) => {
-            dispatch(setUsersTotalCountAC(totalCount))
+            dispatch(setUsersTotalCount(totalCount))
         },
         toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
+            dispatch(toggleIsFetching(isFetching))
         },
 
     }
-}
+}*/
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+
+export default connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setUsersTotalCount,
+    toggleIsFetching,
+})(UsersContainer);

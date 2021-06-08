@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./users.module.css";
-import {followAC, UsersType} from "../../redux/users-reducer";
+import {follow, UsersType} from "../../redux/users-reducer";
 import axios from "axios";
 import userPhoto from "../../../src/assets/images/user.jpg"
 /*
