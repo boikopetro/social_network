@@ -3,8 +3,8 @@ import {ActionsType, MessagesPageType} from "./store";
 const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 const SEND_MESSAGE = "SEND-MESSAGE";
 
-export const updateNewMessageBodyCreator = (body: string) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body} as const);
-export const sendMessageCreator = () => ({type: SEND_MESSAGE} as const);
+export const updateNewMessageBodyAC = (body: string) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body} as const);
+export const sendMessageAC = () => ({type: SEND_MESSAGE} as const);
 
 const initialState = {
     messages: [

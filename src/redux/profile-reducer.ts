@@ -2,16 +2,16 @@ import {ActionsType, PostType, ProfilePageType} from "./store";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-
-export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const);
-export const addPostActionCreator = () => ({type: ADD_POST} as const);
+const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 const initialState = {
     posts: [
         {id: "1", post: "hi hi hi", likeCounter: 99},
         {id: "2", post: "post", likeCounter: 9}
     ],
-    newPostText: ""
+    newPostText: "",
+    profile: null,
+
 }
 
 
@@ -35,10 +35,17 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
                 newPostText: action.newText,
             };
         }
+        case SET_USER_PROFILE: {
+//@ts-ignore
+            return {...state, profile: action.profile}
+        }
         default:
             return state;
     }
 }
 
+export const updateNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const);
+export const setUserProfileAC = (profile:ProfilePageType) => ({type: SET_USER_PROFILE, profile} as const);
+export const addPostAC = () => ({type: ADD_POST} as const);
 
 export default profileReducer;

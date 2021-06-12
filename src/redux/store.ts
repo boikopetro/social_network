@@ -1,5 +1,5 @@
-import  {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
-import  {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
+import {addPostAC, setUserProfileAC, updateNewPostTextAC} from "./profile-reducer";
+import  {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
 import {InitialStateType} from "./users-reducer";
 
 /*const store: StoreType = {
@@ -55,10 +55,11 @@ export type StoreType = {
 }
 */
 
-export type ActionsType = ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
-    | ReturnType<typeof updateNewMessageBodyCreator>
-    | ReturnType<typeof sendMessageCreator>
+export type ActionsType = ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>
+    | ReturnType<typeof setUserProfileAC>
 
 export type PostType = {
     id: string,
@@ -80,7 +81,7 @@ export type DialogItemType = {
 type DialogsType = Array<DialogItemType>
 
 export type ProfilePageType = {
-    posts: ProfilePostsTypes,
+    posts: ProfilePostsTypes
     newPostText: string
 }
 export type MessagesPageType = {
