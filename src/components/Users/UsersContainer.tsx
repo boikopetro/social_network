@@ -14,23 +14,22 @@ import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {AppStateType} from "../../redux/redux-store";
 
-type mapDispatchToPropsType =
-    {
-        follow: (userId: string) => void
-        unfollow: (userId: string) => void
-        setUsers: (users: UsersType) => void
-        setCurrentPage: (pageNumber: number) => void
-        setUsersTotalCount: (totalCount: number) => void
-        toggleIsFetching: (isFetching: boolean) => void
-    }
-type MapStateToPropsType = {
+type MapStateType = {
     users: UsersType
     pageSize: number
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
 }
-type UsersContainerType = MapStateToPropsType & mapDispatchToPropsType
+type MapDispatchType = {
+    follow: (userId: string) => void
+    unfollow: (userId: string) => void
+    setUsers: (users: UsersType) => void
+    setCurrentPage: (pageNumber: number) => void
+    setUsersTotalCount: (totalCount: number) => void
+    toggleIsFetching: (isFetching: boolean) => void
+}
+type UsersContainerType = MapStateType & MapDispatchType
 
 class UsersContainer extends React.Component<UsersContainerType> {
     componentDidMount() {
@@ -64,7 +63,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
     }
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

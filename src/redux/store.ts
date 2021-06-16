@@ -83,6 +83,7 @@ type DialogsType = Array<DialogItemType>
 export type ProfilePageType = {
     posts: ProfilePostsTypes
     newPostText: string
+    profile: any
 }
 export type MessagesPageType = {
     messages: MessagesPropsType

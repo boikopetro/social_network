@@ -1,4 +1,12 @@
-import {ActionsType, PostType, ProfilePageType} from "./store";
+import { PostType, ProfilePageType} from "./store";
+import {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+
+export type ActionsType = ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>
+    | ReturnType<typeof setUserProfileAC>
+
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -13,7 +21,6 @@ const initialState = {
     profile: null,
 
 }
-
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
     switch (action.type) {
@@ -36,7 +43,6 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
             };
         }
         case SET_USER_PROFILE: {
-//@ts-ignore
             return {...state, profile: action.profile}
         }
         default:
