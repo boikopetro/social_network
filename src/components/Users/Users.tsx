@@ -4,7 +4,7 @@ import userPhoto from "../../assets/images/user.jpg";
 import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
-
+import {usersApi} from "../../api/api";
 
 export type UsersPropsType = {
     totalUsersCount: number
@@ -15,7 +15,6 @@ export type UsersPropsType = {
     follow: (userId: string) => void
     unfollow: (userId: string) => void
 }
-
 
 const Users = (props: UsersPropsType) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -44,12 +43,7 @@ const Users = (props: UsersPropsType) => {
                     <div>
                         {el.followed
                             ? <button onClick={() => {
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
-                                    withCredentials: true,
-                                    headers: {
-                                        "API-KEY": "bcb0b5fe-869a-4b99-9053-6bb7e1416d15"
-                                    }
-                                })
+                                usersApi.unFollowUser(el.id)
                                     .then(response => {
                                         if (response.data.resultCode === 0) {
                                             props.unfollow(el.id)
@@ -58,12 +52,7 @@ const Users = (props: UsersPropsType) => {
                             }}> UnFollow</button>
 
                             : <button onClick={() => {
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
-                                    withCredentials: true,
-                                    headers: {
-                                        "API-KEY": "bcb0b5fe-869a-4b99-9053-6bb7e1416d15"
-                                    }
-                                })
+                                usersApi.followUser(el.id)
                                     .then(response => {
                                         if (response.data.resultCode === 0) {
                                             props.follow(el.id)
