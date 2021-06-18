@@ -4,6 +4,7 @@ export type InitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: any
 }
 export type UsersType = Array<UserType>
 
@@ -26,6 +27,7 @@ type ActionsType = ReturnType<typeof follow>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof toggleIsFollowingProgress>
 
 
 const FOLLOW = "FOLLOW";
@@ -34,6 +36,7 @@ const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 
 
 const initialState: InitialStateType = {
@@ -42,6 +45,7 @@ const initialState: InitialStateType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
+    followingInProgress: [],
 }
 
 const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -80,6 +84,16 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching};
         }
+        case TOGGLE_IS_FOLLOWING_PROGRESS: {
+            return {
+                ...state,
+
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    //@ts-ignore
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            };
+        }
         default:
             return state;
     }
@@ -94,5 +108,10 @@ export const setUsersTotalCount = (totalUsersCount: number) => ({
     count: totalUsersCount
 } as const);
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const);
+export const toggleIsFollowingProgress = (isFetching: boolean, userId: string) => ({
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    isFetching,
+    userId,
+} as const);
 
 export default usersReducer;
