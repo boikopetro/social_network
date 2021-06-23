@@ -1,5 +1,6 @@
 import { PostType, ProfilePageType} from "./store";
 import {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+import {usersApi} from "../api/api";
 
 export type ActionsType = ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostTextAC>
@@ -52,6 +53,12 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 
 export const updateNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const);
 export const setUserProfileAC = (profile:ProfilePageType) => ({type: SET_USER_PROFILE, profile} as const);
+export const getUserProfileAC = (userId: string) => (dispatch: any) => {
+    usersApi.getProfile(userId)
+        .then(response => {
+           dispatch(setUserProfileAC(response.data));
+        });
+}
 export const addPostAC = () => ({type: ADD_POST} as const);
 
 export default profileReducer;

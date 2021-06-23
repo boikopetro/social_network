@@ -5,7 +5,7 @@ import styles from './Head.module.css'
 type HeaderPropsType = {
     isAuth: boolean
     login: string | null
-    setAuthUserData: (userId: string, email: string, login: string) => void
+    getAuthUsersData: () => void
 }
 
 const Header = (props: HeaderPropsType) => {
