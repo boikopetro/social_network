@@ -13,7 +13,8 @@ type MapDispatchToPropsType = (dispatch:typeof store.dispatch) => {
 }*/
 const mapStateToProps = (state:AppStateType) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 const mapDispatchToProps = (dispatch: typeof store.dispatch) => {

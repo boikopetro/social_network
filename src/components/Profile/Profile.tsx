@@ -5,6 +5,7 @@ import {ProfilePageType} from "../../redux/store";
 
 type ProfilePropsType = {
     profile: ProfilePageType
+    isAuth: boolean
 }
 
 const Profile = (props: ProfilePropsType) => {

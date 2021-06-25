@@ -1,5 +1,5 @@
 import {addPostAC, setUserProfileAC, updateNewPostTextAC} from "./profile-reducer";
-import  {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+import {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
 import {InitialStateType} from "./users-reducer";
 
 /*const store: StoreType = {
