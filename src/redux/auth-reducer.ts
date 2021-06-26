@@ -1,4 +1,5 @@
 import {authApi} from "../api/api";
+import {Dispatch} from "redux";
 
 export type UsersType = Array<UserType>
 
@@ -54,7 +55,7 @@ export const setAuthUserData = (userId: string, email: string, login: string) =>
     data: {userId, email, login}
 } as const);
 
-export const getAuthUsersData = () => (dispatch: any) => {
+export const getAuthUsersData = () => (dispatch: Dispatch) => {
     authApi.authMe()
         .then(response => {
             if (response.data.resultCode === 0) {

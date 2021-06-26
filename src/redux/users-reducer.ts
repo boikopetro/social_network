@@ -1,4 +1,5 @@
 import {usersApi} from "../api/api";
+import {Dispatch} from "redux";
 
 export type InitialStateType = {
     users: UsersType
@@ -129,7 +130,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
 }
 
 export const follow = (userId: string) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingProgress(true, userId))
         usersApi.followUser(userId)
             .then(response => {
