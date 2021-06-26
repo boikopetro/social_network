@@ -7,23 +7,16 @@ import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {MessagesPageType} from "../../../redux/store";
 
+type MapStateToPropsType = { dialogsPage: MessagesPageType }
 
-/*
-type MapStateToPropsType = (state: AppStateType) => {
-    dialogsPage: MessagesPageType
-}
-type MapDispatchToPropsType = (dispatch: typeof store.dispatch) => {
-    updateNewMessageBody: () => void
-    sendMessage: (body: string) => void
-}
-*/
+type MapDispatchToPropsType = { updateNewMessageBody: (body: string) => void } & { sendMessage: () => void }
 
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage,
     }
 }
-const mapDispatchToProps = (dispatch: typeof store.dispatch) => {
+const mapDispatchToProps = (dispatch: typeof store.dispatch): MapDispatchToPropsType => {
     return {
         updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyAC(body))
