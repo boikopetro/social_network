@@ -3,7 +3,6 @@ import styles from "./users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import {usersApi} from "../../api/api";
 
 export type UsersPropsType = {
     totalUsersCount: number
@@ -13,10 +12,11 @@ export type UsersPropsType = {
     users: UsersType
     follow: (userId: string) => void
     unfollow: (userId: string) => void
-    followingInProgress: any
+    followingInProgress: []
 }
 
 const Users = (props: UsersPropsType) => {
+    debugger
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) {

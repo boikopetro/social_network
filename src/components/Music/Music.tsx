@@ -7,5 +7,4 @@ const Music = () => {
         </div>
     )
 }
-
 export default Music
