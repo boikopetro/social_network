@@ -1,4 +1,5 @@
 import React from "react";
+import {updateStatus} from "../../../redux/profile-reducer";
 
 /*type ProfileStatusType = {
     state: {
@@ -9,23 +10,49 @@ import React from "react";
 }*/
 
 export type ProfileStatusPropsType = {
+    //state: StateType
+    updateStatus: (status: string) => void
     status: string
 }
 
+/*type StateType = {
+    editMode: boolean
+    status: string
+}*/
+
 class ProfileStatus extends React.Component<ProfileStatusPropsType> {
+
     state = {
         editMode: false,
+        status: this.props.status
     }
 
-    activateEditMode() {
+    activateEditMode = () => {
         this.setState({
             editMode: true
-        })
+        });
     }
-    deactivateEditMode() {
+    deactivateEditMode = () => {
         this.setState({
             editMode: false
+        });
+        this.props.updateStatus(this.state.status);
+
+    }
+    onStatusChange = (e: any) => {
+        this.setState({
+            status: e.currentTarget.value
         })
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+       if(prevProps.status !== this.props.status) {
+           this.setState({
+               status: this.props.status
+           })
+       }
+
+
     }
 
     render() {
@@ -34,13 +61,14 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                 {
                     !this.state.editMode &&
                     <div>
-                        <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status}</span>
+                        <span onDoubleClick={this.activateEditMode}>{this.props.status || "No status"}</span>
                     </div>
                 }
                 {
                     this.state.editMode &&
                     <div>
-                        <input onBlur={this.deactivateEditMode.bind(this)} value={this.props.status} autoFocus/>
+                        <input onChange={this.onStatusChange} onBlur={this.deactivateEditMode} value={this.state.status}
+                               autoFocus/>
                     </div>
                 }
             </div>

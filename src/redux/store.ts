@@ -1,4 +1,4 @@
-import {addPostAC, setUserProfileAC, updateNewPostTextAC} from "./profile-reducer";
+import {addPostAC, ProfileType, setUserProfileAC, updateNewPostTextAC} from "./profile-reducer";
 import {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
 import {InitialStateType} from "./users-reducer";
 
@@ -83,7 +83,8 @@ type DialogsType = Array<DialogItemType>
 export type ProfilePageType = {
     posts: ProfilePostsTypes
     newPostText: string
-    profile: any
+    profile: ProfileType
+    status: string
 }
 export type MessagesPageType = {
     messages: MessagesPropsType

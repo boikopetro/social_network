@@ -14,7 +14,7 @@ type MyPostsPropsType = {
 const MyPosts = (props: MyPostsPropsType) => {
 
     const postsElements = props.posts
-        .map(el => <Post post={el.post} likeCounter={el.likeCounter}/>);
+        .map(el => <Post key={el.id} post={el.post} likeCounter={el.likeCounter}/>);
 
     const onAddPost = () => {
         props.addPost();

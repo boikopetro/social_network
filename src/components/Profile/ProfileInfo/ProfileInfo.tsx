@@ -1,37 +1,18 @@
 import Preloader from "../../common/Preloader/Preloader";
 import styles from "./ProfileInfo.module.css";
 import React from "react";
-import ProfileStatus, {ProfileStatusPropsType} from "./ProfileStatus"
-
-/*type ContactsType = {
-    facebook: null
-    website: null
-    vk: null
-    twitter: null
-    instagram: null
-}
-
-type PhotosType = {
-    small: string
-    large: string
-}
-
-type ProfileType = {
-    aboutMe: string
-    contacts: ContactsType
-    fullName: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    photos: PhotosType
-    userId: number
-}*/
+import ProfileStatus from "./ProfileStatus"
+import { ProfileType } from "../../../redux/profile-reducer";
 
 type ProfileInfoPropsType = {
-    profile: any
+    profile: ProfileType
+    status: string
+    updateStatus: (status: string) =>void
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
-    if (!props.profile) {
+    if (!Object.keys(props.profile).length) {
+
         return <Preloader/>
     }
     return (
@@ -42,10 +23,10 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
             </div>*/}
             <div>
                 <img src={props.profile.photos.large}/>
-                <ProfileStatus status={"tytytyty"}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <div>{props.profile.fullName}</div>
                 <div>{props.profile.aboutMe}</div>
-                <div>{props.profile.contacts.github}</div>
+                <div>{props.profile.contacts.vk}</div>
             </div>
         </div>
     )
