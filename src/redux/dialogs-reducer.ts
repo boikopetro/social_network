@@ -1,10 +1,9 @@
-import {ActionsType, MessagesPageType} from "./store";
+import {MessagesPageType} from "./store";
+import {ActionsType} from "./profile-reducer";
 
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 const SEND_MESSAGE = "SEND-MESSAGE";
 
-export const updateNewMessageBodyAC = (body: string) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body} as const);
-export const sendMessageAC = () => ({type: SEND_MESSAGE} as const);
+export const sendMessageAC = (newMessageBody: string) => ({type: SEND_MESSAGE, newMessageBody} as const);
 
 const initialState = {
     messages: [
@@ -12,7 +11,6 @@ const initialState = {
         {id: "1", message: "text"},
         {id: "2", message: "hi"}
     ],
-    newMessageBody: "",
     dialogs: [
         {id: "0", name: "Jack"},
         {id: "1", name: "Nick"},
@@ -23,19 +21,12 @@ const initialState = {
     ]
 }
 
-
 const dialogsReducer = (state: MessagesPageType = initialState, action: ActionsType): MessagesPageType => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessageBody: action.body
-            };
         case SEND_MESSAGE:
-            const body = state.newMessageBody;
+            const body = action.newMessageBody;
             return {
                 ...state,
-                newMessageBody: "",
                 messages: [...state.messages, {id: "9", message: body}]
             };
         default:

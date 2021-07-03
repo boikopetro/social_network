@@ -1,5 +1,5 @@
 import React from "react";
-// @ts-ignore
+
 import {reduxForm, Field} from 'redux-form'
 
 const LoginForm = (props: any) => {

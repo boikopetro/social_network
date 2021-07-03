@@ -4,7 +4,6 @@ import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
 import thunkMiddleware from "redux-thunk"
-// @ts-ignore
 import { reducer as formReducer } from 'redux-form'
 
 export type ReduxStoreType = typeof rootReducer
