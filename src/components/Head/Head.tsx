@@ -6,6 +6,7 @@ type HeaderPropsType = {
     isAuth: boolean
     login: string | null
     getAuthUsersData: () => void
+    logout: any
 }
 
 const Header = (props: HeaderPropsType) => {
@@ -13,7 +14,7 @@ const Header = (props: HeaderPropsType) => {
         <header className={styles.header}>
             <img src="http://www.studiopozitiv.in.ua/wp-content/uploads/2013/01/minions.jpg" alt={"studiopozitiv"}/>
             <div className={styles.loginBlock}>
-                {props.isAuth ? props.login : <NavLink to={"/login"}>Login</NavLink>}
+                {props.isAuth ? <div>{props.login} - <button onClick={props.logout}>Log out</button> </div> : <NavLink to={"/login"}>Login</NavLink>}
             </div>
         </header>
     )
