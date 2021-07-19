@@ -32,7 +32,7 @@ export type ProfileType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     photos: PhotosType
-    userId: number
+    userId: string | null
 }
 
 const initialState: initStateType = {
@@ -78,13 +78,13 @@ const profileReducer = (state = initialState, action: ActionsType): initStateTyp
 
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
-export const getUserProfileAC = (userId: string) => (dispatch: Dispatch<ActionsType>) => {
+export const getUserProfileAC = (userId: string | null) => (dispatch: Dispatch<ActionsType>) => {
     usersApi.getProfile(userId)
         .then(response => {
             dispatch(setUserProfileAC(response.data));
         });
 }
-export const getStatus = (userId: string) => (dispatch: Dispatch<ActionsType>) => {
+export const getStatus = (userId: string | null) => (dispatch: Dispatch<ActionsType>) => {
     profileApi.getStatus(userId)
         .then(response => {
             dispatch(setStatus(response.data));
