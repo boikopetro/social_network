@@ -1,4 +1,3 @@
-import {Dispatch} from "redux"
 import {getAuthUsersData} from "./auth-reducer";
 
 export type UsersType = Array<UserType>

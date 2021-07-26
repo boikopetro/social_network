@@ -54,7 +54,9 @@ const initialState: InitialStateType = {
 const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case FOLLOW:
+            debugger
             return {
+
                 ...state,
                 users: state.users.map(el => {
                     if (el.id === action.userId) {
@@ -121,7 +123,6 @@ export const requestUsers = (page: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(page))
-
         usersApi.getUsers(page, pageSize)
             .then(data => {
                 dispatch(toggleIsFetching(false))
@@ -145,7 +146,7 @@ export const follow = (userId: string) => {
 }
 
 export const unfollow = (userId: string) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingProgress(true, userId))
         usersApi.unFollowUser(userId)
             .then(response => {

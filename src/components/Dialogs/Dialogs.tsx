@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {MessagesPageType} from "../../redux/store";
 import styles from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
@@ -6,7 +6,7 @@ import Message from "./Message/Message";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
-import {Redirect} from "react-router-dom";
+
 
 type DialogsPropsType = {
     sendMessage: (newMessageBody: string) => void

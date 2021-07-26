@@ -41,16 +41,15 @@ const Users = (props: UsersPropsType) => {
                     </div>
                     <div>
                         {el.followed
-                            //@ts-ignore
                             ? <button disabled={props.followingInProgress.some(id => id === el.id)}
                                       onClick={() => {
                                           props.unfollow(el.id)
                                       }}>UnFollow</button>
-                            //@ts-ignore
                             : <button disabled={props.followingInProgress.some(id => id === el.id)}
                                       onClick={() => {
                                           props.follow(el.id)
-                                      }}>Follow</button>}
+                                      }}>Follow</button>
+                        }
                     </div>
                 </span>
                 <span>

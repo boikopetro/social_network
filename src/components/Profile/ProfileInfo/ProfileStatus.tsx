@@ -1,5 +1,4 @@
 import React from "react";
-import {updateStatus} from "../../../redux/profile-reducer";
 
 /*type ProfileStatusType = {
     state: {

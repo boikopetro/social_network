@@ -4,8 +4,7 @@ import {
     followSuccess, requestUsers,
     setCurrentPage,
     toggleIsFollowingProgress,
-    unfollowSuccess,
-    UsersType
+    unfollowSuccess
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
@@ -14,12 +13,11 @@ import {compose} from "redux";
 import {
     getCurrentPageSelector, getIsFetchingSelector, getIsFollowingInProgressSelector,
     getPageSizeSelector,
-    getTotalUsersCountSelector,
-    getUsersSelector
+    getTotalUsersCountSelector, getUsers
 } from "../../redux/users-selectors";
 
 type MapStateType = {
-    users: UsersType
+    users: any
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -45,12 +43,17 @@ class UsersContainer extends React.Component<UsersContainerType> {
     }
 
     render() {
-        return <>{this.props.isFetching ? <Preloader/> : null}
+        return <>
+            {this.props.isFetching ? <Preloader/> : null}
             <Users
-                totalUsersCount={this.props.totalUsersCount} pageSize={this.props.pageSize}
+                key={this.props.users.userId}
+                totalUsersCount={this.props.totalUsersCount}
+                pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
-                users={this.props.users} follow={this.props.follow} unfollow={this.props.unfollow}
+                users={this.props.users}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
                 followingInProgress={this.props.followingInProgress}
             />
         </>
@@ -70,7 +73,8 @@ class UsersContainer extends React.Component<UsersContainerType> {
 
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
-        users: getUsersSelector(state),
+        users: getUsers(state),
+        //users: getUsersSelector(state),
         pageSize: getPageSizeSelector(state),
         totalUsersCount: getTotalUsersCountSelector(state),
         currentPage: getCurrentPageSelector(state),
@@ -82,9 +86,9 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
 export default compose<React.ComponentType>(
     //withAuthRedirect,
     connect(mapStateToProps, {
-    follow: followSuccess,
-    unfollow: unfollowSuccess,
-    setCurrentPage,
-    toggleIsFollowingProgress,
-    getUsers: requestUsers,
-}))(UsersContainer)
+        follow: followSuccess,
+        unfollow: unfollowSuccess,
+        setCurrentPage,
+        toggleIsFollowingProgress,
+        getUsers: requestUsers,
+    }))(UsersContainer)

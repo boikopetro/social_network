@@ -33,7 +33,7 @@ class App extends React.Component {
         else
         return (        //@ts-ignore
 
-            <div className="app-wrapper"><HeaderContainer/>
+            <div  className="app-wrapper"><HeaderContainer/>
                 <Nav/>
                 <div className="app-wrapper-content">
                     <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
@@ -56,4 +56,4 @@ const mapStateToProps = (state: AppStateType) => ({
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {initializeApp}))(App)
+    connect(mapStateToProps, {initializeApp}))(App) as React.ComponentType
