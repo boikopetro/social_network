@@ -11,10 +11,10 @@ type MyPostsPropsType = {
     posts: PostType[]
 }
 
-const MyPosts = (props: MyPostsPropsType) => {
+const MyPosts = React.memo((props: MyPostsPropsType) => {
 
     const postsElements = props.posts
-        .map(el => <Post key={el.id} post={el.post} likeCounter={el.likeCounter}/>);
+        .map(el => <Post key={el.id} post={el.post} likeCounter={el.likeCounter}/>)
 
     const onAddPost = (values: any) => {
         props.addPost(values.newPostText)
@@ -30,7 +30,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     )
-}
+})
 
 const maxLength10 = maxLengthCreator(10);
 const AddPostForm = (props: any) => {
