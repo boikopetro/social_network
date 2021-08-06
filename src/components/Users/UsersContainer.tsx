@@ -1,9 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
+    follow,
     followSuccess, requestUsers,
     setCurrentPage,
-    toggleIsFollowingProgress,
+    toggleIsFollowingProgress, unfollow,
     unfollowSuccess
 } from "../../redux/users-reducer";
 import Users from "./Users";
@@ -84,10 +85,9 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
 }
 
 export default compose<React.ComponentType>(
-    //withAuthRedirect,
     connect(mapStateToProps, {
-        follow: followSuccess,
-        unfollow: unfollowSuccess,
+        follow,
+        unfollow,
         setCurrentPage,
         toggleIsFollowingProgress,
         getUsers: requestUsers,

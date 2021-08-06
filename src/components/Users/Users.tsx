@@ -31,15 +31,16 @@ const Users = (props: UsersPropsType) => {
             })}
         </div>
         {
-            props.users.map(el => <div key={el.id}>
-                <span>
-                    <div>
-                        <NavLink to={"/profile/" + el.id}>
-                            <img src={el.photos.small !== null ? el.photos.small : userPhoto}
-                                 className={styles.userPhoto}/>
-                        </NavLink>
-                    </div>
-                    <div>
+            props.users.map(el =>
+                <div key={el.id}>
+                    <span>
+                        <div>
+                             <NavLink to={"/profile/" + el.id}>
+                                 <img src={el.photos.small !== null ? el.photos.small : userPhoto}
+                                      className={styles.userPhoto}/>
+                             </NavLink>
+                         </div>
+                        <div>
                         {el.followed
                             ? <button disabled={props.followingInProgress.some(id => id === el.id)}
                                       onClick={() => {
@@ -51,8 +52,8 @@ const Users = (props: UsersPropsType) => {
                                       }}>Follow</button>
                         }
                     </div>
-                </span>
-                <span>
+                    </span>
+                    <span>
                     <span>
                         <div>{el.fullName}</div>
                         <div>{el.status}</div>
@@ -62,7 +63,7 @@ const Users = (props: UsersPropsType) => {
                         <div>{"el.location.city"}</div>
                     </span>
                 </span>
-            </div>)
+                </div>)
         }
     </div>
 }

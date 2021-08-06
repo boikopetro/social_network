@@ -27,7 +27,7 @@ const dialogsReducer = (state: MessagesPageType = initialState, action: ActionsT
             const body = action.newMessageBody;
             return {
                 ...state,
-                messages: [...state.messages, {id: "9", message: body}]
+                messages: [...state.messages, {id: "9", message: body}],
             };
         default:
             return state;
