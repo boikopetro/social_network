@@ -13,15 +13,10 @@ type ProfileInfoPropsType = {
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
     if (!Object.keys(props.profile).length) {
-
         return <Preloader/>
     }
     return (
         <div className={styles.profileBlock}>
-            {/* <div>
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZnGKVh4G3LQ1VMuxdmKnxKcsplUeSx1EbDQ&usqp=CAU"/>
-            </div>*/}
             <div>
                 <img src={props.profile.photos.large}/>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
