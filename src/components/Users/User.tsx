@@ -1,23 +1,18 @@
 import React from "react";
 import styles from "./users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
-import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import Paginator from "../common/Paginator/Paginator";
+import {UserType} from "../../redux/app-reducer";
 
-export type UsersPropsType = {
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    onPageChanged: (pageNumber: number) => void
-    users: UsersType
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
+export type UserPropsType = {
+    user: UserType
     followingInProgress: []
+    unfollow: (userId: string) => void
+    follow: (userId: string) => void
 }
 
-//@ts-ignore
-const User = ({user, followingInProgress, unfollow, follow}) => {
+
+const User = ({user, followingInProgress, unfollow, follow}: UserPropsType) => {
     return (
         <div>
             <span>

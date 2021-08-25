@@ -14,11 +14,11 @@ export type UsersPropsType = {
     followingInProgress: []
 }
 
-//@ts-ignore
-const Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}) => {
+
+const Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}:UsersPropsType) => {
     return <div>
         <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
-                   totalUsersCount={totalUsersCount} pageSize={pageSize}/>
+                   totalItemsCount={totalUsersCount} pageSize={pageSize}/>
         <div>
             {
                 users.map((u: any) => <User key={u.id}
