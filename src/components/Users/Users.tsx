@@ -15,20 +15,21 @@ export type UsersPropsType = {
 }
 
 
-const Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}:UsersPropsType) => {
+const Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}: UsersPropsType) => {
     return <div>
-        <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
-                   totalItemsCount={totalUsersCount} pageSize={pageSize}/>
         <div>
             {
-                users.map((u: any) => <User key={u.id}
-                                            user={u}
-                                            followingInProgress={props.followingInProgress}
-                                            unfollow={props.unfollow}
-                                            follow={props.follow}
-                />)
+                users.map((u: any) =>
+                    <User key={u.id}
+                          user={u}
+                          followingInProgress={props.followingInProgress}
+                          unfollow={props.unfollow}
+                          follow={props.follow}
+                    />)
             }
         </div>
+        <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
+                   totalItemsCount={totalUsersCount} pageSize={pageSize}/>
     </div>
 }
 
