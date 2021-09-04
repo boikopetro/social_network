@@ -15,6 +15,7 @@ import {
     getPageSizeSelector,
     getTotalUsersCountSelector, getUsers
 } from "../../redux/users-selectors";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStateType = {
     users: any
@@ -80,4 +81,5 @@ export default compose<React.ComponentType>(
         setCurrentPage,
         toggleIsFollowingProgress,
         getUsers: requestUsers,
+        withAuthRedirect,
     }))(UsersContainer)
