@@ -1,3 +1,9 @@
 .profileBlock {
     padding: 10px;
 }
+
+.avatarPhoto {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
