@@ -8,18 +8,23 @@ export type ActionsType = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof savePhotoSuccessAC>
+   /* | ReturnType<typeof saveProfileDataAC>*/
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
+/*const SAVE_PROFILE_DATA = "SAVE_PROFILE_DATA"*/
 
-type ContactsType = {
-    facebook: null
-    website: null
-    vk: null
-    twitter: null
-    instagram: null
+export type ContactsType = {
+    facebook: null | string
+    website: null | string
+    vk: null | string
+    twitter: null | string
+    instagram: null | string
+    youtube: null | string
+    github: null | string
+    mainLink: null | string
 }
 
 type PhotosType = {
@@ -77,6 +82,9 @@ const profileReducer = (state = initialState, action: ActionsType): initStateTyp
         case SAVE_PHOTO_SUCCESS: {
             return {...state, profile: {...state.profile, photos: action.photos}}
         }
+        /*case SAVE_PROFILE_DATA: {
+            return {...state, profile: action.profile}
+        }*/
         default:
             return state
     }
@@ -84,14 +92,16 @@ const profileReducer = (state = initialState, action: ActionsType): initStateTyp
 export const savePhotoSuccessAC = (photos: any) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatusAC = (status: string) => ({type: SET_STATUS, status} as const)
-export const getUserProfileAC = (userId: string | null) => async (dispatch: Dispatch<ActionsType>) => {
-    const response = await usersApi.getProfile(userId)
-    dispatch(setUserProfileAC(response.data))
-}
+export const addPostAC = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
+/*export const saveProfileDataAC = (profile: ProfileType) => ({type: SAVE_PROFILE_DATA, profile} as const)*/
 
 export const getStatus = (userId: string | null) => async (dispatch: Dispatch<ActionsType>) => {
     const response = await profileApi.getStatus(userId)
     dispatch(setStatusAC(response.data))
+}
+export const getUserProfile = (userId: string | null) => async (dispatch: Dispatch<ActionsType>) => {
+    const response = await usersApi.getProfile(userId)
+    dispatch(setUserProfileAC(response.data))
 }
 
 export const updateStatus = (status: string) => async (dispatch: Dispatch<ActionsType>) => {
@@ -107,7 +117,12 @@ export const savePhoto = (file: any) => async (dispatch: Dispatch<ActionsType>) 
     }
 }
 
-
-export const addPostAC = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
+export const saveProfileData = (profile: ProfileType) => async (dispatch: any, getState:any) => {
+    const userId = getState().auth.userId
+    const response = await profileApi.saveProfile(profile)
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfile(userId))
+    }
+}
 
 export default profileReducer;
