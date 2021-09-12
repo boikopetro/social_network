@@ -10,3 +10,8 @@
 .contact {
     margin-left: 10px;
 }
+
+.formSummaryError {
+    color: red;
+    border: 1px solid red;
+}

@@ -39,9 +39,12 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
         }
     }
 
-    const onSubmit = (formData:any) => {
-        props.saveProfile(formData)
-        setEditMode(false)
+    const onSubmit = (formData: any) => {
+        props.saveProfile(formData).then(
+            () => {
+                setEditMode(false)
+            }
+        )
     }
     return (
         <div className={styles.profileBlock}>
