@@ -26,13 +26,13 @@ type InitialStateType = {
     login: string | null
     isAuth: boolean
     isFetching: boolean
-    captchaUrl: any
+    captchaUrl: string | null
 }
 
 const SET_USER_DATA = "auth/SET_USER_DATA"
 const GET_CAPTCHA_URL_SUCCESS = "auth/GET_CAPTCHA_URL_SUCCESS"
 
-const initialState = {
+const initialState: InitialStateType = {
     userId: null,
     email: null,
     login: null,
@@ -41,7 +41,7 @@ const initialState = {
     captchaUrl: null,
 }
 
-const authReducer = (state: InitialStateType = initialState, action: actionsType): InitialStateType => {
+const authReducer = (state = initialState, action: actionsType): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
         case GET_CAPTCHA_URL_SUCCESS:
@@ -72,7 +72,7 @@ export const getAuthUsersData = () => async (dispatch: Dispatch) => {
     }
 }
 
-export const login = (email: string, password: string, rememberMe: any, captcha: any) => async (dispatch: any) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
     const response = await authApi.login(email, password, rememberMe, captcha)
     if (response.data.resultCode === 0) {
         dispatch(getAuthUsersData())

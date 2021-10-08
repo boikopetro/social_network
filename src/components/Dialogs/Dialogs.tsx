@@ -1,16 +1,16 @@
 import React from "react";
-import {MessagesPageType} from "../../redux/store";
 import styles from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {InitialStateType} from "../../redux/dialogs-reducer";
 
 
 type DialogsPropsType = {
     sendMessage: (newMessageBody: string) => void
-    dialogsPage: MessagesPageType
+    dialogsPage: InitialStateType
     isAuth: boolean
 };
 const Dialogs = (props: DialogsPropsType) => {

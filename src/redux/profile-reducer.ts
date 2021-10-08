@@ -1,8 +1,13 @@
-import {PostType} from "./store";
 import {sendMessageAC} from "./dialogs-reducer";
 import {profileApi, usersApi} from "../api/api";
 import {Dispatch} from "redux";
 import {stopSubmit} from "redux-form";
+
+export type PostType = {
+    id: string,
+    post: string,
+    likeCounter: number
+}
 
 export type ActionsType = ReturnType<typeof addPostAC>
     | ReturnType<typeof sendMessageAC>
@@ -26,9 +31,9 @@ export type ContactsType = {
     mainLink: null | string
 }
 
-type PhotosType = {
-    small: string
-    large: string
+export type PhotosType = {
+    small: string | null
+    large: string | null
 }
 
 export type ProfileType = {
@@ -41,8 +46,13 @@ export type ProfileType = {
     userId: string | null
     savePhoto: any
 }
+type initialStateType = {
+    posts: Array<PostType>
+    profile: ProfileType
+    status: string
+}
 
-const initialState: initStateType = {
+const initialState: initialStateType = {
     posts: [
         {id: "1", post: "hi hi hi", likeCounter: 99},
         {id: "2", post: "post", likeCounter: 9},
@@ -50,13 +60,9 @@ const initialState: initStateType = {
     profile: {} as ProfileType,
     status: "",
 }
-type initStateType = {
-    posts: Array<PostType>
-    profile: ProfileType
-    status: string
-}
 
-const profileReducer = (state = initialState, action: ActionsType): initStateType => {
+
+const profileReducer = (state = initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostType = {
@@ -85,7 +91,7 @@ const profileReducer = (state = initialState, action: ActionsType): initStateTyp
             return state
     }
 }
-export const savePhotoSuccessAC = (photos: any) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
+export const savePhotoSuccessAC = (photos: PhotosType) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatusAC = (status: string) => ({type: SET_STATUS, status} as const)
 export const addPostAC = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
@@ -112,7 +118,7 @@ export const savePhoto = (file: any) => async (dispatch: Dispatch<ActionsType>) 
     }
 }
 
-export const saveProfileData = (profile: ProfileType) => async (dispatch: any, getState:any) => {
+export const saveProfileData = (profile: ProfileType) => async (dispatch: any, getState: any) => {
     const userId = getState().auth.userId
     const response = await profileApi.saveProfile(profile)
     if (response.data.resultCode === 0) {

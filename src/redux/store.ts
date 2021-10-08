@@ -61,35 +61,14 @@ export type ActionsType = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfileAC>
 */
 
-export type PostType = {
-    id: string,
-    post: string,
-    likeCounter: number
-}
-export type ProfilePostsTypes = Array<PostType>
 
-export type MessageType = {
-    id: string,
-    message: string
-}
-export type MessagesPropsType = Array<MessageType>
-
-export type DialogItemType = {
-    id: string
-    name: string
-}
-type DialogsType = Array<DialogItemType>
-
-export type ProfilePageType = {
+/*export type ProfilePageType = {
     posts: ProfilePostsTypes
     newPostText: string
     profile: ProfileType
     status: string
-}
-export type MessagesPageType = {
-    messages: MessagesPropsType
-    dialogs: DialogsType
-}
+}*/
+
 /*
 export type RootStateType = {
     profilePage: ProfilePageType

@@ -20,13 +20,11 @@ type appReducerType = ReturnType<typeof initializedSuccess>
 type InitialStateType = {
     initialized: boolean
 }
-
-const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS"
-const initialState = {
+const initialState: InitialStateType = {
     initialized: false,
 }
 
-const appReducer = (state: InitialStateType = initialState, action: appReducerType): InitialStateType => {
+const appReducer = (state = initialState, action: appReducerType): InitialStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {
@@ -37,6 +35,7 @@ const appReducer = (state: InitialStateType = initialState, action: appReducerTy
             return state
     }
 }
+const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS"
 
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS} as const)
 

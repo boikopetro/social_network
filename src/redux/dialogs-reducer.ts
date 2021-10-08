@@ -1,11 +1,25 @@
-import {MessagesPageType} from "./store";
 import {ActionsType} from "./profile-reducer";
 
 const SEND_MESSAGE = "SEND-MESSAGE";
 
+export type DialogItemType = {
+    id: string
+    name: string
+}
+export type MessageType = {
+    id: string,
+    message: string
+}
+type DialogsType = Array<DialogItemType>
+type MessagesType = Array<MessageType>
+export type InitialStateType = {
+    messages: MessagesType
+    dialogs: DialogsType
+}
+
 export const sendMessageAC = (newMessageBody: string) => ({type: SEND_MESSAGE, newMessageBody} as const);
 
-const initialState = {
+const initialState: InitialStateType = {
     messages: [
         {id: "0", message: "hi"},
         {id: "1", message: "text"},
@@ -21,7 +35,7 @@ const initialState = {
     ]
 }
 
-const dialogsReducer = (state: MessagesPageType = initialState, action: ActionsType): MessagesPageType => {
+const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case SEND_MESSAGE:
             const body = action.newMessageBody;
