@@ -1,7 +1,8 @@
 import React from "react";
-import {UsersType} from "../../redux/users-reducer";
+
 import Paginator from "../common/Paginator/Paginator";
 import User from "./User";
+import {UsersType} from "../../redux/types/types";
 
 export type UsersPropsType = {
     totalUsersCount: number

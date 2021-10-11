@@ -5,7 +5,6 @@ import {RouteComponentProps, withRouter} from 'react-router-dom'
 import {
     getStatus,
     getUserProfile,
-    ProfileType,
     savePhoto,
     saveProfileData,
     updateStatus
@@ -13,6 +12,7 @@ import {
 import {MapStatePropsTypeForRedirect} from "../../hoc/withAuthRedirect"
 import {compose} from "redux"
 import {AppStateType} from "../../redux/redux-store"
+import {ProfileType} from "../../redux/types/types";
 
 type PathParamsType = {
     userId: string | null

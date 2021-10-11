@@ -2,21 +2,6 @@ import {authApi, securityApi} from "../api/api"
 import {Dispatch} from "redux"
 import {stopSubmit} from "redux-form"
 
-export type UsersType = Array<UserType>
-
-export type UserType = {
-    id: string
-    photos: any
-    followed: boolean
-    fullName: string
-    status: string
-    location: LocationType
-}
-type LocationType = {
-    city: string
-    country: string
-}
-
 type actionsType = ReturnType<typeof setAuthUserData>
     | ReturnType<typeof getCaptchaUrlSuccess>
 

@@ -1,10 +1,10 @@
 import Preloader from "../../common/Preloader/Preloader";
 import styles from "./ProfileInfo.module.css";
 import React, {useState} from "react";
-import {ProfileType} from "../../../redux/profile-reducer";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.jpg";
 import ProfileDataForm from "./ProfileDataForm";
+import {ProfileType} from "../../../redux/types/types";
 
 type ProfileInfoPropsType = {
     profile: ProfileType

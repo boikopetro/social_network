@@ -1,20 +1,5 @@
 import {getAuthUsersData} from "./auth-reducer";
 
-export type UsersType = Array<UserType>
-
-export type UserType = {
-    id: string
-    photos: any
-    followed: boolean
-    fullName: string
-    status: string
-    location: LocationType
-}
-type LocationType = {
-    city: string
-    country: string
-}
-
 type appReducerType = ReturnType<typeof initializedSuccess>
 
 type InitialStateType = {

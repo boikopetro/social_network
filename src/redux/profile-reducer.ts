@@ -2,12 +2,7 @@ import {sendMessageAC} from "./dialogs-reducer";
 import {profileApi, usersApi} from "../api/api";
 import {Dispatch} from "redux";
 import {stopSubmit} from "redux-form";
-
-export type PostType = {
-    id: string,
-    post: string,
-    likeCounter: number
-}
+import {PhotosType, PostType, ProfileType} from "./types/types";
 
 export type ActionsType = ReturnType<typeof addPostAC>
     | ReturnType<typeof sendMessageAC>
@@ -20,32 +15,6 @@ const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
 
-export type ContactsType = {
-    facebook: null | string
-    website: null | string
-    vk: null | string
-    twitter: null | string
-    instagram: null | string
-    youtube: null | string
-    github: null | string
-    mainLink: null | string
-}
-
-export type PhotosType = {
-    small: string | null
-    large: string | null
-}
-
-export type ProfileType = {
-    aboutMe: string
-    contacts: ContactsType
-    fullName: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    photos: PhotosType
-    userId: string | null
-    savePhoto: any
-}
 type initialStateType = {
     posts: Array<PostType>
     profile: ProfileType
@@ -61,14 +30,14 @@ const initialState: initialStateType = {
     status: "",
 }
 
-
 const profileReducer = (state = initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostType = {
                 id: "8",
                 post: action.newPostText,
-                likeCounter: 77777
+                likeCounter: 77777,
+                newPostText: "",
             };
             return {
                 ...state,
