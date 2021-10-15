@@ -16,20 +16,19 @@ import {
     getTotalUsersCountSelector, getUsers
 } from "../../redux/users-selectors";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {UsersType} from "../../redux/types/types";
 
 type MapStateType = {
-    users: any
-    pageSize: number
-    totalUsersCount: number
     currentPage: number
+    pageSize: number
     isFetching: boolean
-    followingInProgress: any
+    users: UsersType
+    totalUsersCount: number
+    followingInProgress: Array<string>
 }
 type MapDispatchType = {
     follow: (userId: string) => void
     unfollow: (userId: string) => void
-    setCurrentPage: (pageNumber: number) => void
-    toggleIsFollowingProgress: (isFetching: boolean, userId: string) => void
     getUsers: (currentPage: number, pageSize: number) => void
 }
 type UsersContainerType = MapStateType & MapDispatchType
@@ -49,7 +48,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users
-                key={this.props.users.userId}
+                //key={this.props.users.userId}
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
@@ -78,8 +77,5 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         follow,
         unfollow,
-        setCurrentPage,
-        toggleIsFollowingProgress,
         getUsers: requestUsers,
-        withAuthRedirect,
-    }))(UsersContainer)
+    }), withAuthRedirect)(UsersContainer)

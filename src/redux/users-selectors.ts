@@ -26,6 +26,6 @@ export const getIsFetchingSelector = (state: AppStateType): boolean => {
     return state.usersPage.isFetching
 }
 
-export const getIsFollowingInProgressSelector = (state: AppStateType): any => {
+export const getIsFollowingInProgressSelector = (state: AppStateType): Array<string> => {
     return state.usersPage.followingInProgress
 }

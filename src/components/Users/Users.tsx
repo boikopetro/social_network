@@ -12,11 +12,11 @@ export type UsersPropsType = {
     users: UsersType
     follow: (userId: string) => void
     unfollow: (userId: string) => void
-    followingInProgress: []
+    followingInProgress: Array<string>
 }
 
 
-const Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}: UsersPropsType) => {
+const Users: React.FC<UsersPropsType> = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}) => {
     return <div>
         <div>
             {

@@ -3,13 +3,13 @@ import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
-import thunkMiddleware from "redux-thunk"
-import { reducer as formReducer } from 'redux-form'
+import thunkMiddleware from "redux-thunk";
+import {reducer as formReducer} from 'redux-form';
 import appReducer from "./app-reducer";
 
-export type ReduxStoreType = typeof rootReducer
-export type AppStoreType = typeof store
-export type AppStateType = ReturnType<ReduxStoreType>
+export type ReduxStoreType = typeof rootReducer;
+export type AppStoreType = typeof store;
+export type AppStateType = ReturnType<ReduxStoreType>;
 
 const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
