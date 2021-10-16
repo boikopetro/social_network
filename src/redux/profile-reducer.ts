@@ -80,7 +80,7 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch<Action
         dispatch(setStatusAC(status))
     }
 }
-export const savePhoto = (file: any) => async (dispatch: Dispatch<ActionsType>) => {
+export const savePhoto = (file: File) => async (dispatch: Dispatch<ActionsType>) => {
     const response = await profileApi.savePhoto(file)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccessAC(response.data.data.photos))

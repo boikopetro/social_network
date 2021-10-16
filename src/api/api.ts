@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ProfileType} from "../redux/types/types";
 
 const instance = axios.create({
     withCredentials: true,
@@ -9,41 +10,41 @@ const instance = axios.create({
 })
 
 export const usersApi = {
-    getUsers(currentPage, pageSize) {
+    getUsers(currentPage: number, pageSize: number) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => {
                 return response.data
             })
     },
-    followUser(userId) {
+    followUser(userId: string) {
         return instance.post(`follow/${userId}`)
             .then(response => {
                 return response.data
             })
     },
-    unFollowUser(userId) {
+    unFollowUser(userId: string) {
         return instance.delete(`follow/${userId}`)
             .then(response => {
                 return response.data
             })
     },
-    getProfile(userId) {
+    getProfile(userId: any) {
         console.warn("Obsolete method. Use profile API obj")
         return profileApi.getProfile(userId);
     }
 }
 
 export const profileApi = {
-    getProfile(userId) {
+    getProfile(userId: any) {
         return instance.get(`profile/` + userId);
     },
-    getStatus(userId) {
+    getStatus(userId: any) {
         return instance.get(`profile/status/` + userId);
     },
-    updateStatus(status) {
+    updateStatus(status: string) {
         return instance.put(`profile/status`, {status: status});
     },
-    savePhoto(photoFile) {
+    savePhoto(photoFile: File) {
         const formData = new FormData();
         formData.append("image", photoFile)
         return instance.put(`profile/photo`, formData, {
@@ -52,7 +53,7 @@ export const profileApi = {
             }
         })
     },
-    saveProfile(profile) {
+    saveProfile(profile: ProfileType) {
         return instance.put(`profile`, profile)
     }
 }
@@ -61,7 +62,7 @@ export const authApi = {
     authMe() {
         return instance.get(`auth/me`);
     },
-    login(email, password, rememberMe = false, captcha = null) {
+    login(email: string, password: string, rememberMe = false, captcha: null | string = null ) {
         return instance.post(`auth/login`, {email, password, rememberMe, captcha});
     },
     logout() {

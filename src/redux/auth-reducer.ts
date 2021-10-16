@@ -2,7 +2,7 @@ import {authApi, securityApi} from "../api/api"
 import {Dispatch} from "redux"
 import {stopSubmit} from "redux-form"
 
-type actionsType = ReturnType<typeof setAuthUserData>
+type ActionsType = ReturnType<typeof setAuthUserData>
     | ReturnType<typeof getCaptchaUrlSuccess>
 
 type InitialStateType = {
@@ -26,7 +26,7 @@ const initialState: InitialStateType = {
     captchaUrl: null,
 }
 
-const authReducer = (state = initialState, action: actionsType): InitialStateType => {
+const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
         case GET_CAPTCHA_URL_SUCCESS:
@@ -49,7 +49,7 @@ export const getCaptchaUrlSuccess = (captchaUrl: string) => ({
     payload: {captchaUrl}
 } as const)
 
-export const getAuthUsersData = () => async (dispatch: Dispatch) => {
+export const getAuthUsersData = () => async (dispatch: Dispatch<ActionsType>) => {
     const response = await authApi.authMe();
     if (response.data.resultCode === 0) {
         let {id, email, login} = response.data.data
@@ -57,7 +57,7 @@ export const getAuthUsersData = () => async (dispatch: Dispatch) => {
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: null | string) => async (dispatch: any) => {
     const response = await authApi.login(email, password, rememberMe, captcha)
     if (response.data.resultCode === 0) {
         dispatch(getAuthUsersData())
