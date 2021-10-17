@@ -1,4 +1,4 @@
-import {authApi, securityApi} from "../api/api"
+import {authApi, ResultCodeForCaptcha, ResultCodesEnum, securityApi} from "../api/api"
 import {Dispatch} from "redux"
 import {stopSubmit} from "redux-form"
 
@@ -50,22 +50,22 @@ export const getCaptchaUrlSuccess = (captchaUrl: string) => ({
 } as const)
 
 export const getAuthUsersData = () => async (dispatch: Dispatch<ActionsType>) => {
-    const response = await authApi.authMe();
-    if (response.data.resultCode === 0) {
-        let {id, email, login} = response.data.data
+    const meData = await authApi.authMe();
+    if (meData.resultCode === ResultCodesEnum.Success) {
+        let {id, email, login} = meData.data
         dispatch(setAuthUserData(id, email, login, true))
     }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: null | string) => async (dispatch: any) => {
-    const response = await authApi.login(email, password, rememberMe, captcha)
-    if (response.data.resultCode === 0) {
+    const loginData = await authApi.login(email, password, rememberMe, captcha)
+    if (loginData.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUsersData())
     } else {
-        if (response.data.resultCode === 0) {
+        if (loginData.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
             dispatch(getCaptchaUrl())
         }
-        const message = response.data.messages.length > 0 ? response.data.messages[0] : "Wrong email or password!"
+        const message = loginData.messages.length > 0 ? loginData.messages[0] : "Wrong email or password!"
         dispatch(stopSubmit("login", {_error: message}))
     }
 }
