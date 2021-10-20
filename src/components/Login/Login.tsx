@@ -11,23 +11,25 @@ import style from "./../common/FormsControls/FormsControls.module.css"
 type LoginFormOwnPropsType = {
     captchaUrl: string | null
 }
-
-type LoginFormValuesType = {
+export type LoginFormValuesType = {
     rememberMe: boolean
     password: string
     email: string
     captcha: string
 }
 
+type LoginFormValuesTypeKeys = Extract<keyof LoginFormValuesType, string>
+
+
 const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPropsType>
     & LoginFormOwnPropsType> = ({handleSubmit, error, captchaUrl}) => {
     return (
         <form onSubmit={handleSubmit}>
-            {createField("Email", "email", [required], Input)}
-            {createField("Password", "password", [required], Input, {type: "password"})}
-            {createField(null, "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
+            {createField<LoginFormValuesTypeKeys>("Email", "email", [required], Input)}
+            {createField<LoginFormValuesTypeKeys>("Password", "password", [required], Input, {type: "password"})}
+            {createField<LoginFormValuesTypeKeys>(undefined, "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
             {captchaUrl && <img src={captchaUrl}/>}
-            {captchaUrl && createField("symbols from image", "captcha", [required], Input, {})}
+            {captchaUrl && createField<LoginFormValuesTypeKeys>("symbols from image", "captcha", [required], Input, {})}
             {error && <div className={style.formSummaryError}>
                 {error}
             </div>}
