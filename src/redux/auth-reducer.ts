@@ -6,7 +6,7 @@ type ActionsType = ReturnType<typeof setAuthUserData>
     | ReturnType<typeof getCaptchaUrlSuccess>
 
 type InitialStateType = {
-    userId: string | null
+    userId: number | null
     email: string | null
     login: string | null
     isAuth: boolean
@@ -39,7 +39,7 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
     }
 }
 
-export const setAuthUserData = (userId: string | null, email: string | null, login: string | null, isAuth: boolean) => ({
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
     payload: {userId, email, login, isAuth}
 } as const)

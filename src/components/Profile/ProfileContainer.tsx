@@ -15,17 +15,17 @@ import {AppStateType} from "../../redux/redux-store"
 import {ProfileType} from "../../redux/types/types";
 
 type PathParamsType = {
-    userId: string | null
+    userId: number | null
 }
 type MapStatePropsType = {
     profile: ProfileType
     status: string
-    authorizedUserId: string | null
+    authorizedUserId: number | null
     isAuth: boolean
 }
 export type MapDispatchPropsType = {
-    getUserProfileAC: (userId: string | null) => void
-    getStatus: (userId: string | null) => void
+    getUserProfileAC: (userId: number | null) => void
+    getStatus: (userId: number | null) => void
     updateStatus: (status: string) => void
     savePhoto: () => void
     saveProfile: any

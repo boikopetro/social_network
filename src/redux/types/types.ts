@@ -22,12 +22,12 @@ export type ProfileType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     photos: PhotosType
-    userId: string | null
+    userId: number | null
     savePhoto: any
 }
 
 export type PostType = {
-    id: string
+    id: number
     post: string
     likeCounter: number
     newPostText?: string
@@ -35,7 +35,7 @@ export type PostType = {
 export type UsersType = Array<UserType>
 
 export type UserType = {
-    id: string
+    id: number
     photos: PhotosType
     followed: boolean
     fullName: string

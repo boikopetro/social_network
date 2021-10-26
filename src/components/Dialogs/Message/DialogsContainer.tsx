@@ -16,7 +16,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         dialogsPage: state.dialogsPage,
     }
 }
-const mapDispatchToProps = (dispatch: typeof store.dispatch): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: any): MapDispatchToPropsType => {
     return {
         sendMessage: (newMessageBody: string) => {
             dispatch(sendMessageAC(newMessageBody))

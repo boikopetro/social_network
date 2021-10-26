@@ -16,29 +16,29 @@ export const usersApi = {
                 return response.data
             })
     },
-    followUser(userId: string) {
+    followUser(userId: number) {
         return instance.post(`follow/${userId}`)
             .then(response => {
                 return response.data
             })
     },
-    unFollowUser(userId: string) {
+    unFollowUser(userId: number) {
         return instance.delete(`follow/${userId}`)
             .then(response => {
                 return response.data
             })
     },
-    getProfile(userId: any) {
+    getProfile(userId: number) {
         console.warn("Obsolete method. Use profile API obj")
         return profileApi.getProfile(userId);
     }
 }
 
 export const profileApi = {
-    getProfile(userId: any) {
+    getProfile(userId: number) {
         return instance.get(`profile/` + userId);
     },
-    getStatus(userId: any) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/` + userId);
     },
     updateStatus(status: string) {
@@ -60,7 +60,7 @@ export const profileApi = {
 
 type MeResponseType = {
     data: {
-        id: string
+        id: number
         email: string
         login: string
     }

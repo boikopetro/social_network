@@ -10,9 +10,9 @@ export type UsersPropsType = {
     currentPage: number
     onPageChanged: (pageNumber: number) => void
     users: UsersType
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
-    followingInProgress: Array<string>
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    followingInProgress: Array<number>
 }
 
 

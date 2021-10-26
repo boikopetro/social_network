@@ -23,8 +23,8 @@ type initialStateType = {
 
 const initialState: initialStateType = {
     posts: [
-        {id: "1", post: "hi hi hi", likeCounter: 99},
-        {id: "2", post: "post", likeCounter: 9},
+        {id: 1, post: "hi hi hi", likeCounter: 99},
+        {id: 2, post: "post", likeCounter: 9},
     ],
     profile: {} as ProfileType,
     status: "",
@@ -34,7 +34,7 @@ const profileReducer = (state = initialState, action: ActionsType): initialState
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostType = {
-                id: "8",
+                id: 8,
                 post: action.newPostText,
                 likeCounter: 77777,
                 newPostText: "",
@@ -65,11 +65,11 @@ export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFI
 export const setStatusAC = (status: string) => ({type: SET_STATUS, status} as const)
 export const addPostAC = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
 
-export const getStatus = (userId: string | null) => async (dispatch: Dispatch<ActionsType>) => {
+export const getStatus = (userId: number) => async (dispatch: Dispatch<ActionsType>) => {
     const response = await profileApi.getStatus(userId)
     dispatch(setStatusAC(response.data))
 }
-export const getUserProfile = (userId: string | null) => async (dispatch: Dispatch<ActionsType>) => {
+export const getUserProfile = (userId: number) => async (dispatch: Dispatch<ActionsType>) => {
     const response = await usersApi.getProfile(userId)
     dispatch(setUserProfileAC(response.data))
 }

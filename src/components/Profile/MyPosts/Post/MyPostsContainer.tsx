@@ -9,7 +9,7 @@ const mapStateToProps = (state:AppStateType) => {
 
     }
 }
-const mapDispatchToProps = (dispatch: typeof store.dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
     return {
         addPost: (newPostText: string) => {
             dispatch(addPostAC(newPostText))

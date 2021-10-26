@@ -1,19 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
-import {
-    follow,
-    requestUsers,
-    setCurrentPage,
-    toggleIsFollowingProgress, unfollow,
-} from "../../redux/users-reducer";
+import {follow, requestUsers, unfollow,} from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {AppStateType} from "../../redux/redux-store";
 import {compose} from "redux";
 import {
-    getCurrentPageSelector, getIsFetchingSelector, getIsFollowingInProgressSelector,
+    getCurrentPageSelector,
+    getIsFetchingSelector,
+    getIsFollowingInProgressSelector,
     getPageSizeSelector,
-    getTotalUsersCountSelector, getUsers
+    getTotalUsersCountSelector,
+    getUsers
 } from "../../redux/users-selectors";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {UsersType} from "../../redux/types/types";
@@ -24,11 +22,11 @@ type MapStateType = {
     isFetching: boolean
     users: UsersType
     totalUsersCount: number
-    followingInProgress: Array<string>
+    followingInProgress: Array<number>
 }
 type MapDispatchType = {
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
 }
 type UsersContainerType = MapStateType & MapDispatchType
@@ -48,7 +46,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users
-                //key={this.props.users.userId}
+                //key={this.props.users.id}
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}

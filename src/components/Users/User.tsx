@@ -7,9 +7,9 @@ import {UserType} from "../../redux/types/types";
 
 export type UserPropsType = {
     user: UserType
-    followingInProgress: Array<string>
-    unfollow: (userId: string) => void
-    follow: (userId: string) => void
+    followingInProgress: Array<number>
+    unfollow: (userId: number) => void
+    follow: (userId: number) => void
 }
 
 
