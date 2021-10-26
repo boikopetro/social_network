@@ -1,6 +1,8 @@
-import {authApi, ResultCodeForCaptcha, ResultCodesEnum, securityApi} from "../api/api"
+import {ResultCodeForCaptchaEnum, ResultCodesEnum} from "../api/api"
 import {Dispatch} from "redux"
 import {stopSubmit} from "redux-form"
+import {authApi} from "../api/authApi";
+import {securityApi} from "../api/securityApi";
 
 type ActionsType = ReturnType<typeof setAuthUserData>
     | ReturnType<typeof getCaptchaUrlSuccess>
@@ -62,7 +64,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
     if (loginData.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUsersData())
     } else {
-        if (loginData.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
+        if (loginData.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired) {
             dispatch(getCaptchaUrl())
         }
         const message = loginData.messages.length > 0 ? loginData.messages[0] : "Wrong email or password!"
@@ -71,8 +73,8 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 }
 
 export const getCaptchaUrl = () => async (dispatch: Dispatch) => {
-    const response = await securityApi.getCaptchaUrl()
-    const captchaUrl = response.data.url
+    const data = await securityApi.getCaptchaUrl()
+    const captchaUrl = data.url
     dispatch(getCaptchaUrlSuccess(captchaUrl))
 }
 
